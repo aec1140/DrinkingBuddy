@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Drinking Buddy</title>
+    <link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script src='js/main.js'></script>
+    <script src='js/utilities.js'></script>
+    <script src='js/loader.js'></script>
+    <script src='js/map.js'></script>
+
+    <style>
+      *{
+        font-family: 'Coming Soon', sans-serif;
+      }
+
+      h1{
+        color:#fff;
+        align: "center";
+        text-shadow: 0 0 20px #000;
+        font-size: 50px;
+        padding: 30px 0 0 10px;
+        background-image: url(images/cocktail.jpg);
+
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 0-80px;
+        height: 100px;
+        width: 600px;
+      }
+
+      div {
+        padding: 20px;
+      }
+
+      div img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin: 0 auto;
+      }
+
+      input[type=text] {
+          width: 500px;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+          background-color: white;
+          background-image: url('images/searchicon.svg');
+          background-position: 10px 10px; 
+          background-repeat: no-repeat;
+          padding: 12px 20px 12px 40px;
+          -webkit-transition: width 0.4s ease-in-out;
+          transition: width 0.4s ease-in-out;
+      }
+
+      .content-container {
+        margin: auto;
+      }
+
+      /* Dropdown CSS http://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_navbar */
+
+      header {
+          background-color: #333;
+      }
+
+      ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+      }
+
+      li { cursor: pointer; }
+
+      ul li {
+          float: left;
+      }
+
+      li a, .dropbtn {
+          display: inline-block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+      }
+
+      .mainNav li a:hover, .dropdown:hover .dropbtn {
+          background-color: red;
+      }
+
+      li.dropdown {
+          display: inline-block;
+      }
+
+      .dropdown-content, .filter-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      }
+
+      .dropdown-content a, .filter-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+      }
+
+      .dropdown-content a:hover {background-color: #f1f1f1}
+
+      .dropdown:hover .dropdown-content, .filter:hover .filter-content  {
+          display: block;
+      }
+
+      #searchBox {
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      #map {
+        padding: 0px;
+        display: none;
+      }
+
+      .blocktext {
+        margin-left: auto;
+        margin-right: auto;
+        width: 20em;
+      }
+
+      #content {
+        visibility: hidden;
+      }
+
+    </style>
+  </head>
+  <body>
+    <form id="accept" action="#">
+      <h3>Terms and Conditions</h3>
+      <p>
+        By accepting these terms and conditions you are stating that you are 21 years old or older. This<br>
+        website is for educational purposes as a combined project with IGME 330 and FOOD 173.
+      </p>
+      <input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the Terms and Conditions and Privacy Policy
+      <input type="submit" name="submit" value="submit" />
+    </form>
+    <div id="content">
+      <h1>DrinkingBuddy&trade;</h1>
+      <p><i>Your own personal bartender at your fingertips!</i></p>
+      <header>
+        <ul class="mainNav">
+          <li><a href="#home" id="home">Home</a></li>
+          <li><a href="#restock" id="restock">Restock</a></li>
+          <li style="float:right" id="searchBox">
+            <form id="searchForm">
+              <input type="text" id="search" placeholder="Search...">
+
+              <ul class="filters"> 
+                <li class="filter">
+                  <a href="#" class="dropbtn">Base Spirit</a>
+                  <div class="filter-content">
+                    <a id="brandy" class="spirits">Brandy</a>
+                    <a id="gin" class="spirits">Gin</a>
+                    <a id="rum" class="spirits">Rum</a>
+                    <a id="tequila" class="spirits">Tequila</a>
+                    <a id="vodka" class="spirits">Vodka</a>
+                    <a id="Whisky" class="spirits">Whisky</a>
+                  </div>
+                </li>
+                <li class="filter">
+                  <a href="#" class="dropbtn">Taste</a>
+                  <div class="filter-content">
+                    <a id="berry" class="taste">Berry</a>
+                    <a id="bitter" class="taste">Bitter</a>
+                    <a id="fresh" class="taste">Fresh</a>
+                    <a id="fruity" class="taste">Fruity</a>
+                    <a id="herb" class="taste">Herb</a>
+                    <a id="sour" class="taste">Sour</a>
+                    <a id="spicy" class="taste">Spicy</a>
+                    <a id="sweet" class="taste">Sweet</a>
+                  </div>
+                </li>
+                <li class="filter">
+                  <a href="#" class="dropbtn">Color</a>
+                  <div class="filter-content">
+                    <a id="brown" class="color">Brown</a>
+                    <a id="blue" class="color">Blue</a>
+                    <a id="green" class="color">Green</a>
+                    <a id="pink" class="color">Pink</a>
+                    <a id="red" class="color">Red</a>
+                    <a id="yellow" class="color">Yellow</a>
+                    <a id="white" class="color">White</a>
+                    <a id="purple" class="color">Purple</a>
+                    <a id="clear" class="color">Clear</a>
+                  </div>
+                </li>
+              </ul>
+            </form>
+          </li>
+        </ul>
+      </header>
+      <div id="map"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV7AsPA-MQYGZAV3t1zuBzJEwjLJfZHV0&libraries=places&callback=initMap" async defer></script>
+        <div id="dynamicContent">
+          <div id="dynamicDrink">
+            <p>No data yet!</p>
+          </div>
+          <div id="dynamicDrinks">
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
